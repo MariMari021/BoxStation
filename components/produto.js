@@ -1,4 +1,4 @@
-import { Pressable, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Pressable, Text, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 export function Produto({ data, onDelete, onSelect, selectedId }) {
@@ -9,11 +9,17 @@ export function Produto({ data, onDelete, onSelect, selectedId }) {
             style={[styles.container, isSelected ? styles.selectedContainer : null]}
             onPress={onSelect}
         >
-            <Text style={styles.text}>
-                {data.quantidade} - {data.nome}
-            </Text>
+            <View>
+                
+                <Text style={styles.text}>
+                    NOME: <Text style={styles.valor}>{data.nome}</Text> 
+                </Text>
+                <Text style={styles.text}>
+                    QUANTIDADE: <Text style={styles.valor}>{data.quantidade}</Text>
+                </Text>
+            </View>
             <TouchableOpacity onPress={onDelete}>
-                <MaterialIcons name="delete" size={24} color="#FF3B30" />
+                <MaterialIcons name="delete" size={24} color="#000" />
             </TouchableOpacity>
         </Pressable>
     );
@@ -39,5 +45,11 @@ const styles = StyleSheet.create({
         flex: 1,
         color: '#333', // Dark text color
         fontSize: 16,
+        fontWeight:'800',
+        color:'#649160'
     },
+    valor:{
+        fontWeight:'500',
+        color:'#000'
+    }
 });

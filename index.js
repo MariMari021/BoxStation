@@ -1,5 +1,5 @@
 // Index.js
-import { View, Button, StyleSheet, TextInput, Alert, FlatList, Pressable } from 'react-native';
+import { View, StyleSheet, TextInput, Alert, FlatList, Pressable, TouchableOpacity, Text } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { usarBD } from './hooks/usarDB';
 import { Produto } from './components/produto';
@@ -79,6 +79,7 @@ export function Index() {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
+                <Text style={styles.inventario}>Inventário de Produtos</Text>
                 <TextInput
                     style={[styles.texto, selectedId ? styles.selectedInput : null]}
                     placeholder="Nome"
@@ -91,8 +92,15 @@ export function Index() {
                     onChangeText={setQuantidade}
                     value={quantidade}
                 />
-                <Button title="Salvar" onPress={create} />
-                <Button title="Atualizar" onPress={update} disabled={!selectedId} />
+                <View style={styles.botao}>
+                    <TouchableOpacity style={styles.salvar} onPress={create}>
+                        <Text style={styles.textoSalvar}>Salvar</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.salvar} onPress={update} disabled={!selectedId}>
+                        <Text style={styles.textoSalvar}>Atualizar</Text>
+                    </TouchableOpacity>
+                </View>
+
             </View>
             <TextInput
                 style={styles.pesquisa}
@@ -122,7 +130,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         gap: 16,
-        backgroundColor: '#F9F9F9',
+        backgroundColor: '#Fff',
     },
     header: {
         paddingTop: 80,
@@ -131,7 +139,7 @@ const styles = StyleSheet.create({
         gap: 15,
         borderBottomEndRadius: 25,
         borderBottomStartRadius: 25,
-        backgroundColor: '#fff',
+        backgroundColor: '#649160',
         borderColor: "rgba(0, 0, 0, 0.1)",
         borderWidth: 2
 
@@ -139,21 +147,24 @@ const styles = StyleSheet.create({
     flatList: {
         paddingStart: 32,
         paddingEnd: 32,
+        marginBottom:42
     },
     texto: {
         height: 54,
         borderWidth: 1,
-        borderRadius: 7,
+        borderRadius: 10,
         borderColor: "#999",
+        backgroundColor: "#fff",
         paddingHorizontal: 16,
     },
-    pesquisa:{
-        height: 54,
+    pesquisa: {
+        paddingVertical:10,
+        paddingHorizontal:15,
         borderWidth: 1,
         borderRadius: 7,
         borderColor: "#999",
-        paddingStart: 32,
-        paddingEnd: 32,
+        marginStart: 32,
+        marginEnd: 32,
     },
     selectedInput: {
         borderColor: '#4CAF50',
@@ -162,4 +173,24 @@ const styles = StyleSheet.create({
     listContent: {
         gap: 16,
     },
+    salvar:{
+        backgroundColor:'#fff',
+        paddingHorizontal:50,
+        paddingVertical:10,
+        borderRadius:10
+    },
+    botao:{
+        flexDirection:'row',
+        justifyContent:'space-between'
+    },
+    textoSalvar:{
+        color:'#649160',
+        fontWeight:'900',
+        fontSize:17
+    },
+    inventario:{
+        fontSize:25,
+        color:"#fff",
+        fontWeight:'900'
+    }
 });
